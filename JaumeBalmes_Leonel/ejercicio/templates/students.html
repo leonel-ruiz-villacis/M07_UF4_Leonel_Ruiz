@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% include "header/header.html" %}
+
+<h2>Alumnes</h2>
+<ul>
+     {% for students in students %}
+        <li>ID: {{ students.id }}, Nombre: {{ students.nombre }}, Apellidos: {{ students.apellidos }}, Edad: {{ students.edad }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'index' %}">Volver a la página principal</a>
+</body>
+</html>
