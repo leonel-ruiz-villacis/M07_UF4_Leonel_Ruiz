@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+      {% include "header/header.html" %}
+      <h2>Benvinguts a l'Escola Jaume Balmes</h2>
+      <ul>
+        <li><a href="{% url 'students' %}">Veure alumnes</a></li>
+        <li><a href="{% url 'teachers' %}">Veure professors</a></li>
+      </ul>
+</body>
+</html>
