@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Dades {{ student.nombre }}</h1>
+    <ul>
+        <li>ID: {{ student.id }}</li>
+        <li>Nombre: {{ student.nombre }}</li>
+        <li>Apellidos: {{ student.apellidos }}</li>
+        <li>Edad: {{ student.edad }}</li>
+    </ul>
+<a href="{% url 'index' %}">Volver a la página principal</a>
+{% endblock %}
+

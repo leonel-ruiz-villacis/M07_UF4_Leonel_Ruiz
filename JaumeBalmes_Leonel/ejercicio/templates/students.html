@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {% include "header/header.html" %}
+{% extends 'index.html' %}
 
-<h2>Alumnes</h2>
+{% block content %}
+
+<h2>DADES Alumnat</h2>
 <ul>
-     {% for students in students %}
-        <li>ID: {{ students.id }}, Nombre: {{ students.nombre }}, Apellidos: {{ students.apellidos }}, Edad: {{ students.edad }}</li>
+     {% for student in students %}
+        <li>ID: {{ student.id }}, Nombre: <a href="{% url 'student_detail' student.id %}">{{ student.nombre }}</a>, Apellidos: {{ student.apellidos }}, Edad: {{ student.edad }} </li>
     {% endfor %}
 </ul>
 <a href="{% url 'index' %}">Volver a la página principal</a>
-</body>
-</html>
+{% endblock %}
