@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Dades {{ teacher.nombre }}</h1>
+    <ul>
+        <li>ID: {{ teacher.id }}</li>
+        <li>Nombre: {{ teacher.nombre }}</li>
+        <li>Apellidos: {{ teacher.apellidos }}</li>
+        <li>Edad: {{ teacher.edad }}</li>
+    </ul>
+<a href="{% url 'index' %}">Volver a la página principal</a>
+{% endblock %}

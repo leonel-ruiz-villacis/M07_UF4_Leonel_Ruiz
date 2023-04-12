@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {% include "header/header.html" %}
-    <h2>Professors</h2>
-    <ul>
-        {% for teachers in teachers %}
-        <li>ID: {{ teachers.id }}, Nombre: {{ teachers.nombre }}, Apellidos: {{ teachers.apellidos }}, Edad: {{ teachers.edad }}</li>
+{% extends 'index.html' %}
+
+{% block content %}
+<h2>Professors</h2>
+<ul>
+    {% for teacher in teachers %}
+        <li>ID: {{ teacher.id }}, Nombre: <a href="{% url 'teacher_detail' teacher.id %}">{{ teacher.nombre }}</a>, Apellidos: {{ teacher.apellidos }}, Edad: {{ teacher.edad }}</li>
     {% endfor %}
-    </ul>
-    <a href="{% url 'index' %}">Volver a la página principal</a>
-</body>
-</html>
+</ul>
+<a href="{% url 'index' %}">Volver a la página principal</a>
+
+{% endblock %}
