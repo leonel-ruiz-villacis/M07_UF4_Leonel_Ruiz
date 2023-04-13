@@ -82,12 +82,18 @@ WSGI_APPLICATION = 'JaumeBalmes_Leonel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'p17',  # Nombre de la base de datos
+        'USER': 'root',  # Usuario de la base de datos
+        'PASSWORD': '',  # Contraseña del usuario
+        'HOST': 'localhost',  # Host de la base de datos
+        'PORT': '3306',  # Puerto de la base de datos
     }
 }
+
 
 
 # Password validation
