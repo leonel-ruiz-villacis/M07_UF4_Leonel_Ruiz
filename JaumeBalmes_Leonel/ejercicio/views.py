@@ -1,5 +1,6 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import MiTablaForm
 
 student_list = [
     {"id": 1, "nombre": "Leonel", "apellidos": "García Martínez", "edad": 23},
@@ -38,3 +39,15 @@ def teacher_detail(request, teacher_id):
     if teacher is None:
         raise Http404("Teacher not found")
     return render(request, 'teacher_detail.html', {'teacher': teacher})
+
+
+
+
+def formulario(request):
+    form = MiTablaForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid(): form.save(); return redirect('ejercicio:index')
+    return render(request, 'formulario.html', {'form': form})
+
+
+
+
