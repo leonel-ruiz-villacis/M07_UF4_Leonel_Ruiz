@@ -1,53 +1,73 @@
-from django.http import Http404
-from django.shortcuts import render, redirect
-from .forms import MiTablaForm
+from django.shortcuts import render, redirect, get_object_or_404
 
-student_list = [
-    {"id": 1, "nombre": "Leonel", "apellidos": "García Martínez", "edad": 23},
-    {"id": 2, "nombre": "Raul", "apellidos": "Pérez López", "edad": 22},
-    {"id": 3, "nombre": "Aitor", "apellidos": "González Sánchez", "edad": 24},
-    {"id": 4, "nombre": "Roger", "apellidos": "Martín Torres", "edad": 21},
-    {"id": 5, "nombre": "Pere", "apellidos": "Navarro García", "edad": 25},
-    {"id": 6, "nombre": "Faro", "apellidos": "Díaz Pérez", "edad": 20},
-]
-
-teacher_list = [
-    {"id": 1, "nombre": "Roger", "apellidos": "Fernández Gómez", "edad": 35},
-    {"id": 2, "nombre": "Pere", "apellidos": "Ramírez Jiménez", "edad": 42},
-    {"id": 3, "nombre": "Faro", "apellidos": "Ortiz Castro", "edad": 38},
-]
+from .forms import MiTablaForm, StudentForm, TeacherForm
+from .models import Student, Teacher
 
 def index(request):
     return render(request, 'index.html')
 
 def students(request):
-    context = {'students': student_list}
-    return render(request, 'students.html', context)
+    student_list = Student.objects.all()
+    return render(request, 'students.html', {'students': student_list})
 
 def teachers(request):
-    context = {'teachers': teacher_list}
-    return render(request, 'teachers.html', context)
+    teacher_list = Teacher.objects.all()
+    return render(request, 'teachers.html', {'teachers': teacher_list})
 
 def student_detail(request, student_id):
-    student = next((s for s in student_list if s['id'] == student_id), None)
-    if student is None:
-        raise Http404("Student not found")
+    student = get_object_or_404(Student, id=student_id)
     return render(request, 'student_detail.html', {'student': student})
 
 def teacher_detail(request, teacher_id):
-    teacher = next((t for t in teacher_list if t['id'] == teacher_id), None)
-    if teacher is None:
-        raise Http404("Teacher not found")
+    teacher = get_object_or_404(Teacher, id=teacher_id)
     return render(request, 'teacher_detail.html', {'teacher': teacher})
-
-
-
 
 def formulario(request):
     form = MiTablaForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid(): form.save(); return redirect('ejercicio:index')
+    if form.is_valid():
+        form.save()
+        return redirect('ejercicio:index')
     return render(request, 'formulario.html', {'form': form})
 
+def add_student(request):
+    form = StudentForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('students')
+    return render(request, 'student_form.html', {'form': form})
+
+def update_student(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    form = StudentForm(request.POST or None, instance=student)
+    if form.is_valid():
+        form.save()
+        return redirect('students')
+    return render(request, 'student_form.html', {'form': form})
+
+def delete_student(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    student.delete()
+    return redirect('students')
+
+def add_teacher(request):
+    form = TeacherForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('teachers')
+    return render(request, 'teacher_form.html', {'form': form})
+
+def update_teacher(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    form = TeacherForm(request.POST or None, instance=teacher)
+    if form.is_valid():
+        form.save()
+        return redirect('teachers')
+    return render(request, 'teacher_form.html', {'form': form})
+
+def delete_teacher(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    teacher.delete()
+    return redirect('teachers')
 
 
 

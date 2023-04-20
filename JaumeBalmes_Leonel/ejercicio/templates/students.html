@@ -1,12 +1,12 @@
 {% extends 'index.html' %}
 
 {% block content %}
-
-<h2>DADES Alumnat</h2>
-<ul>
-     {% for student in students %}
-        <li>ID: {{ student.id }}, Nombre: <a href="{% url 'student_detail' student.id %}">{{ student.nombre }}</a>, Apellidos: {{ student.apellidos }}, Edad: {{ student.edad }} </li>
+  <h2>DADES Alumnat</h2>
+  <ul>
+    {% for student in students %}
+      <li>ID: {{ student.id }}, Nombre: <a href="{% url 'student_detail' student.id %}">{{ student.nombre }}</a>, Apellidos: {{ student.apellidos }}, Edad: {{ student.edad }} <a href="{% url 'update_student' student.id %}">Editar</a> <a href="{% url 'delete_student' student.id %}">Eliminar</a></li>
     {% endfor %}
-</ul>
-<a href="{% url 'index' %}">Volver a la página principal</a>
+  </ul>
+  <a href="{% url 'add_student' %}">Agregar nuevo estudiante</a><br>
+  <a href="{% url 'index' %}">Volver a la página principal</a>
 {% endblock %}

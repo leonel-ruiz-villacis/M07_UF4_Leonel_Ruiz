@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'JaumeBalmes_Leonel.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'p17',  # Nombre de la base de datos
+        'NAME': 'p19',  # Nombre de la base de datos
         'USER': 'root',  # Usuario de la base de datos
         'PASSWORD': '',  # Contraseña del usuario
         'HOST': 'localhost',  # Host de la base de datos
